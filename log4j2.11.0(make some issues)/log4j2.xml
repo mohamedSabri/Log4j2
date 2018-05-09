@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="basePath">D:\\logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="debugFileLogger" fileName="${basePath}/app-debug.log" filePattern="${basePath}/app-debug-%d{yyyy-MM-dd}.log">
+	        <Filters>
+	         <ThresholdFilter level="info"  onMatch="DENY" onMismatch="NEUTRAL"/>
+	         <ThresholdFilter level="debug"  onMatch="ACCEPT" onMismatch="DENY"/>
+	        </Filters>
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="50 MB"></SizeBasedTriggeringPolicy>
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+
+        <RollingFile name="infoFileLogger" fileName="${basePath}/app-info.log" filePattern="${basePath}/app-info-%d{yyyy-MM-dd}.log">
+	        <Filters>
+
+	        	 <ThresholdFilter level="warn"  onMatch="DENY" onMismatch="NEUTRAL"/>
+		         <ThresholdFilter level="info"  onMatch="ACCEPT" onMismatch="DENY"/>
+
+	        </Filters>
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="50 MB"></SizeBasedTriggeringPolicy>
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+
+	        </RollingFile>
+	                <RollingFile name="errorFileLogger" fileName="${basePath}/app-error.log" filePattern="${basePath}/app-error-%d{yyyy-MM-dd}.log">
+		        <Filters>
+
+		        	 <ThresholdFilter level="fatal"  onMatch="DENY" onMismatch="NEUTRAL"/>
+			         <ThresholdFilter level="error"  onMatch="ACCEPT" onMismatch="DENY"/>
+
+		        </Filters>
+	            <PatternLayout>
+	                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+	            </PatternLayout>
+	            <Policies>
+	                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+	                <SizeBasedTriggeringPolicy size="50 MB"></SizeBasedTriggeringPolicy>
+	            </Policies>
+	            <DefaultRolloverStrategy max="20" />
+	        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout   pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+        </Console>
+    </Appenders>
+    <!-- the Loggers tag contains the list of Loggers instances  -->
+    <Loggers>
+    <!-- configure a Logger for the HMILogger java class and set its entry level -->
+        <Logger name="com.si.util.HMILogger" level="debug" additivity="true">
+            <AppenderRef ref="debugFileLogger" level="debug" />
+            <AppenderRef ref="infoFileLogger" level="info"/>
+            <AppenderRef ref="errorFileLogger" level="error" />
+        </Logger>
+        <Root level="debug" additivity="false">
+            <appender-ref ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+	<!-- define the file appender -->
+	<appender name="Error-out" class="org.apache.log4j.RollingFileAppender">
+		<!-- set append to true -->
+		<param name="Append" value="true" />
+		<!-- set maximum file size to be 10 MB -->
+		<param name="maxFileSize" value="10MB" />
+		<!-- set number of backup to be 10 -->
+		<param name="maxBackupIndex" value="10" />
+		<!-- define the path of the log file -->
+		<param name="File" value="logs/error.log" />
+		<!-- define the layout of the appender -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- define the pattern of layout -->
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p - %m%n" />
+		</layout>
+		<!-- define the filter -->
+		<filter class="org.apache.log4j.varia.LevelMatchFilter">
+			<param name="LevelToMatch" value="error" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+		<filter class="org.apache.log4j.varia.DenyAllFilter" />
+	</appender>
+
+		<appender name="Info-out" class="org.apache.log4j.RollingFileAppender">
+		<!-- set append to true -->
+		<param name="Append" value="true" />
+		<!-- set maximum file size to be 10 MB -->
+		<param name="maxFileSize" value="10MB" />
+		<!-- set number of backup to be 10 -->
+		<param name="maxBackupIndex" value="10" />
+		<!-- define the path of the log file -->
+		<param name="File" value="logs/info.log" />
+		<!-- define the layout of the appender -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- define the pattern of layout -->
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p - %m%n" />
+		</layout>
+		<!-- define the filter -->
+		<filter class="org.apache.log4j.varia.LevelMatchFilter">
+			<param name="LevelToMatch" value="info" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+		<filter class="org.apache.log4j.varia.DenyAllFilter" />
+	</appender>
+
+	<!-- define the root logger -->
+	<root>
+		<appender-ref ref="Error-out" />
+		<appender-ref ref="Info-out" />
+	</root>
+</log4j:configuration>
