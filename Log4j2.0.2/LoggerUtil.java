@@ -6,7 +6,12 @@ import org.apache.logging.log4j.Logger;
 public class LoggerUtil {
 
 	private static Logger LOGGER = LogManager.getLogger(LoggerUtil.class.getName());
-
+	/**
+	 * prevent any class to make instance from the LoggerUtil class.
+	 */
+	private LoggerUtil() {
+	}
+	
 	public static void setLogger(String loggerName) {
 		LOGGER = LogManager.getLogger(loggerName);
 	}
