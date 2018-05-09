@@ -11,31 +11,29 @@ public class LoggerUtil {
 		LOGGER = LogManager.getLogger(loggerName);
 	}
 
-	public static void trace(Exception e) {
-
-		LOGGER.trace(getLoggerMessage(e));
+	public static void trace(String message) {
+		LOGGER.trace(message);
 	}
 
-	public static void debug(Exception e) {
-		LOGGER.debug(getLoggerMessage(e));
+	public static void debug(String message) {
+		LOGGER.debug(message);
+
 	}
 
-	public static void info(Exception e) {
-		// DOMConfigurator.configure(LOG_PATH);
-		LOGGER.info(getLoggerMessage(e));
+	public static void info(String message) {
+		LOGGER.info(message);
 	}
 
-	public static void warn(Exception e) {
-		LOGGER.warn(getLoggerMessage(e));
+	public static void warn(String message) {
+		LOGGER.warn(message);
 	}
 
 	public static void error(Exception e) {
-		// DOMConfigurator.configure("logs/log4j.xml");
 		LOGGER.error(getLoggerMessage(e));
 	}
 
-	public static void fatal(Exception e) {
-		LOGGER.fatal(getLoggerMessage(e));
+	public static void fatal(String message) {
+		LOGGER.fatal(message);
 	}
 
 	private static String getLoggerMessage(Exception e) {
