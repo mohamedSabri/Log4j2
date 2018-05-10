@@ -10,6 +10,7 @@ public class LoggerUtil {
 	 * prevent any class to make instance from the LoggerUtil class.
 	 */
 	private LoggerUtil() {
+		
 	}
 
 	public static void setLogger(String loggerName) {
