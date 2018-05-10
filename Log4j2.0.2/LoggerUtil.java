@@ -11,7 +11,7 @@ public class LoggerUtil {
 	 */
 	private LoggerUtil() {
 	}
-	
+
 	public static void setLogger(String loggerName) {
 		LOGGER = LogManager.getLogger(loggerName);
 	}
