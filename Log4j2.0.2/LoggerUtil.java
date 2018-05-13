@@ -5,14 +5,13 @@ import org.apache.logging.log4j.Logger;
 
 public class LoggerUtil {
 
-	private static Logger LOGGER = LogManager.getLogger(LoggerUtil.class.getName());
 	/**
 	 * prevent any class to make instance from the LoggerUtil class.
 	 */
 	private LoggerUtil() {
-		
-
 	}
+
+	private static Logger LOGGER = LogManager.getLogger(LoggerUtil.class.getName());
 
 	public static void setLogger(String loggerName) {
 		LOGGER = LogManager.getLogger(loggerName);
@@ -29,6 +28,7 @@ public class LoggerUtil {
 
 	public static void info(String message) {
 		LOGGER.info(message);
+		System.err.println("LOGGER NAME::::::::::>> " + LOGGER.getName());
 	}
 
 	public static void warn(String message) {
@@ -43,9 +43,10 @@ public class LoggerUtil {
 		LOGGER.fatal(message);
 	}
 
-	private static String getLoggerMessage(Exception e) {
+	public static String getLoggerMessage(Exception e) {
 		String loggerMessage = "Exception occurred in " + e.getStackTrace()[0].getClassName() + " at line: "
-				+ e.getStackTrace()[0].getLineNumber() + " and the exception type is " + e.getClass();
+				+ e.getStackTrace()[0].getLineNumber() + " and the exception type is " + e.getClass() + " message:"
+				+ e.getMessage();
 		return loggerMessage;
 	}
 }

@@ -7,20 +7,26 @@
 	<Appenders>
 		<RollingFile name="hmiDebugFileAppender" fileName="${basePath}/hmi-debug.log"
 			filePattern="${basePath}/hmi-debug-%d{yyyy-MM-dd}.log">
+
 			<Filters>
 				<ThresholdFilter level="info" onMatch="DENY"
 					onMismatch="NEUTRAL" />
 				<ThresholdFilter level="debug" onMatch="ACCEPT"
 					onMismatch="DENY" />
 			</Filters>
+
+
 			<PatternLayout>
 				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
 				</pattern>
 			</PatternLayout>
+
 			<Policies>
 				<SizeBasedTriggeringPolicy size="50 MB"></SizeBasedTriggeringPolicy>
 			</Policies>
 			<DefaultRolloverStrategy max="20" />
+
+
 		</RollingFile>
 
 		<RollingFile name="hmiInfoFileAppender" fileName="${basePath}/hmi-info.log"
@@ -40,6 +46,27 @@
 			<Policies>
 				<!-- rollover the log file when the date changes -->
 				<!-- <TimeBasedTriggeringPolicy interval="1" modulate="true" /> -->
+				<SizeBasedTriggeringPolicy size="50 MB"></SizeBasedTriggeringPolicy>
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+
+		</RollingFile>
+
+		<RollingFile name="hmiWarnFileAppender" fileName="${basePath}/hmi-warn.lgo"
+			filePattern="${basePath}/hmi-warn-%d{yyyy-MM-dd}.log">
+			<Filters>
+
+				<ThresholdFilter level="error" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+					onMismatch="DENY" />
+
+			</Filters>
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
 				<SizeBasedTriggeringPolicy size="50 MB"></SizeBasedTriggeringPolicy>
 			</Policies>
 			<DefaultRolloverStrategy max="20" />
@@ -110,6 +137,28 @@
 			<DefaultRolloverStrategy max="20" />
 		</RollingFile>
 
+		<RollingFile name="dataEngineeringWarnFileAppender"
+			fileName="${basePath}/dataEngineering-warn.log" filePattern="${basePath}/dataEngineering-warn-%d{yyyy-MM-dd}.log">
+
+			<Filters>
+
+				<ThresholdFilter level="error" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+					onMismatch="DENY" />
+
+			</Filters>
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="50 MB"></SizeBasedTriggeringPolicy>
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+
+		</RollingFile>
+
 		<RollingFile name="dataEngineeringErrorFileAppender"
 			fileName="${basePath}/dataEngineering-error.log" filePattern="${basePath}/dataEngineering-error-%d{yyyy-MM-dd}.log">
 
@@ -132,21 +181,22 @@
 			<DefaultRolloverStrategy max="20" />
 		</RollingFile>
 
-		<!-- 		<Console name="console" target="SYSTEM_OUT">
-			 <PatternLayout   pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
-		</Console> -->
+		<!-- <Console name="console" target="SYSTEM_OUT"> <PatternLayout pattern="[%-5level]
+			%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" /> </Console> -->
 	</Appenders>
 	<Loggers>
 		<Logger name="HMI" level="debug" additivity="true">
 			<AppenderRef ref="hmiDebugFileAppender" level="debug" />
 			<AppenderRef ref="hmiInfoFileAppender" level="info" />
+			<AppenderRef ref="hmiWarnFileAppender" level="warn" />
 			<AppenderRef ref="hmiErrorFileAppender" level="error" />
 		</Logger>
 
-		<Logger name="HMI-DataEngineering" additivity="true">
+		<Logger name="HMI-DataEngineering" level="debug" additivity="true">
 			<AppenderRef ref="dataEngineeringDebugFileAppender"
 				level="debug" />
 			<AppenderRef ref="dataEngineeringInfoFileAppender" level="info" />
+			<AppenderRef ref="dataEngineeringWarnFileAppender" level="warn"/>
 			<AppenderRef ref="dataEngineeringErrorFileAppender"
 				level="error" />
 		</Logger>
